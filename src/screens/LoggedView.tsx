@@ -10,13 +10,14 @@ type LoggedViewScreen = StackScreenProps<
   Routes.loggedView
 >;
 
-const LoggedView: React.FC<LoggedViewScreen> = () => {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Text>Storage</Text>
-      <FAB />
-    </SafeAreaView>
-  );
+const LoggedView: React.FC<LoggedViewScreen> = ({ navigation }) => {
+  navigation.setOptions({
+    headerShown: true,
+    headerBackTitleVisible: false,
+    headerTintColor: '#000',
+    headerTitle: 'Screen 3'
+  });
+  return <SafeAreaView style={{ flex: 1 }}></SafeAreaView>;
 };
 
 export default LoggedView;

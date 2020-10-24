@@ -43,6 +43,7 @@ const Wiki: React.FC<WikiScreen> = ({ navigation }) => {
         placeholder="enter a topic"
         onSearchPress={handleDataFetch}
         onChangeText={(text: string) => setSearchTerm(text)}
+        autoCapitalize="none"
         onSubmitEditing={handleDataFetch}
       />
 

@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-export const defaultURL = 'https://github.com';
+export const defaultURL = 'https://kiafuka.dev';
 
 export const boxShadow = {
   ...Platform.select({

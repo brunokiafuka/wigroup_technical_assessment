@@ -6,6 +6,7 @@ interface IAuthContext {
   isLogged?: boolean;
   user?: string;
   setIsLogged?: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const AuthContext = React.createContext<IAuthContext>({});
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }: any) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLogged, setIsLogged, user }}>
+    <AuthContext.Provider value={{ isLogged, setIsLogged, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

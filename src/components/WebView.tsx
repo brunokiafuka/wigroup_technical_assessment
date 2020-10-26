@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, Text, Alert } from 'react-native';
 import { WebView as RNWebView } from 'react-native-webview';
 
 interface IProps {
@@ -14,6 +14,22 @@ const WebView = ({ uri }) => {
       }}
       domStorageEnabled={true}
       scalesPageToFit={true}
+      pullToRefreshEnabled
+      renderLoading={() => (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator />
+        </View>
+      )}
+      renderError={() => (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Text>😢</Text>
+          <Text>Please enter a valid url</Text>
+        </View>
+      )}
     />
   );
 };

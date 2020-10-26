@@ -16,7 +16,7 @@ import { useAuthContext } from 'context/AuthContext';
 type AuthScreen = StackScreenProps<RoutesStackParamList, Routes.auth>;
 
 const AuthMain: React.FC<AuthScreen> = () => {
-  const { setIsLogged } = useAuthContext();
+  const { setIsLogged, setUser } = useAuthContext();
   const [username, setUsername] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
 
@@ -29,6 +29,7 @@ const AuthMain: React.FC<AuthScreen> = () => {
     await AsyncStorage.setItem('@username', username);
 
     setIsLogged(true);
+    setUser(username);
     return;
   };
 

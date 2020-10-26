@@ -5,13 +5,15 @@ import { Feather } from '@expo/vector-icons';
 
 interface IProps {
   placeholder: string;
-  onSearchPress: () => void;
+  onSearchPress?: () => void;
+  isNotAutoSearch?: boolean;
   [rest: string]: any;
 }
 
 const HeaderSearch: React.FC<IProps> = ({
   placeholder,
   onSearchPress,
+  isNotAutoSearch = false,
   ...rest
 }) => {
   return (
@@ -23,9 +25,11 @@ const HeaderSearch: React.FC<IProps> = ({
           keyboardType="web-search"
         />
       </View>
-      <TouchableOpacity onPress={onSearchPress} style={{ marginLeft: 10 }}>
-        <Feather name="search" size={24} color="black" />
-      </TouchableOpacity>
+      {isNotAutoSearch && (
+        <TouchableOpacity onPress={onSearchPress} style={{ marginLeft: 10 }}>
+          <Feather name="search" size={24} color="black" />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

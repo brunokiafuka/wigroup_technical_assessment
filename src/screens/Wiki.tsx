@@ -45,6 +45,7 @@ const Wiki: React.FC<WikiScreen> = ({ navigation }) => {
         onChangeText={(text: string) => setSearchTerm(text)}
         autoCapitalize="none"
         onSubmitEditing={handleDataFetch}
+        isNotAutoSearch
       />
 
       <FlatList

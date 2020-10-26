@@ -5,6 +5,7 @@ import { Alert, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HeaderSearch from 'components/HeaderSearch';
 import WebView from 'components/WebView';
+import _ from 'lodash';
 
 import isURL from 'utils/isUrl';
 import urlFixer from 'utils/urlFixer';
@@ -17,7 +18,7 @@ const Search: React.FC<SearchScreen> = ({ navigation }) => {
   const [url, setUrl] = React.useState<string>(defaultURL);
   const [uri, setUri] = React.useState<string>(defaultURL);
 
-  const handleValidateURL = () => {
+  const handleSearchOnSubmit = () => {
     if (!isURL(url)) {
       Alert.alert('Error', 'Please add a valid url');
       return;
@@ -26,15 +27,27 @@ const Search: React.FC<SearchScreen> = ({ navigation }) => {
     setUri(urlFixer(url));
   };
 
+  const debounceSearch = _.debounce(
+    (searchTerm: string) => {
+      if (!isURL(searchTerm)) {
+        return;
+      }
+
+      setUrl(searchTerm);
+
+      setUri(urlFixer(searchTerm));
+    },
+    1000,
+    { maxWait: 5000 }
+  );
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <HeaderSearch
         placeholder="enter url"
-        onSearchPress={handleValidateURL}
-        onChangeText={(url: string) => setUrl(url)}
+        onChangeText={(text: string) => debounceSearch(text)}
         autoCapitalize="none"
-        value={url}
-        onSubmitEditing={handleValidateURL}
+        onSubmitEditing={handleSearchOnSubmit}
       />
 
       <WebView uri={uri} />
